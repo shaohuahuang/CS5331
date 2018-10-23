@@ -8,9 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class CookieInjectionController {
+  @GetMapping("/")
+  public String cookieShadowingChecking(HttpServletResponse response){
+    return "cookie";
+  }
+  
   @GetMapping("/overshadow")
   public String cookieShadowing(HttpServletResponse response){
-    Cookie cookie = new Cookie("project", "cs5331-overshadow");
+    Cookie cookie = new Cookie("project", "cs5331");
+    cookie.setSecure(true);
     cookie.setPath("/");
     response.addCookie(cookie);
     return "cookie";
